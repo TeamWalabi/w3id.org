@@ -80,10 +80,6 @@ RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [NC,OR]
 RewriteCond %{HTTP_ACCEPT} \*/\* [NC]
 RewriteRule ^ontology/?$ https://w3id.org/health-ri/ontology/ttl [R=303,L]
 
-# If an Accept header exists but none matched, return 406 (as in w3id example)
-RewriteCond %{HTTP_ACCEPT} .+
-RewriteRule ^ontology/?$ - [R=406,L]
-
 # Default
 RewriteRule ^ontology/?$ https://w3id.org/health-ri/ontology/ttl [R=303,L]
 
@@ -120,10 +116,6 @@ RewriteCond %{HTTP_ACCEPT} application/n-triples [NC,OR]
 RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [NC,OR]
 RewriteCond %{HTTP_ACCEPT} \*/\* [NC]
 RewriteRule ^ontology/v([0-9]+\.[0-9]+\.[0-9]+)/?$ https://w3id.org/health-ri/ontology/v$1/ttl [R=303,L]
-
-# 406 if Accept exists but none matched
-RewriteCond %{HTTP_ACCEPT} .+
-RewriteRule ^ontology/v([0-9]+\.[0-9]+\.[0-9]+)/?$ - [R=406,L]
 
 # Default
 RewriteRule ^ontology/v([0-9]+\.[0-9]+\.[0-9]+)/?$ https://w3id.org/health-ri/ontology/v$1/ttl [R=303,L]
@@ -162,10 +154,6 @@ RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [NC,OR]
 RewriteCond %{HTTP_ACCEPT} \*/\* [NC]
 RewriteRule ^semantic-interoperability/mappings/?$ https://w3id.org/health-ri/semantic-interoperability/mappings/ttl [R=303,L]
 
-# 406 if Accept exists but none matched
-RewriteCond %{HTTP_ACCEPT} .+
-RewriteRule ^semantic-interoperability/mappings/?$ - [R=406,L]
-
 # Default
 RewriteRule ^semantic-interoperability/mappings/?$ https://w3id.org/health-ri/semantic-interoperability/mappings/ttl [R=303,L]
 
@@ -196,10 +184,6 @@ RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [NC,OR]
 RewriteCond %{HTTP_ACCEPT} \*/\* [NC]
 RewriteRule ^mapping-vocabulary/?$ https://w3id.org/health-ri/mapping-vocabulary/ttl [R=303,L]
 
-# 406 if Accept exists but none matched
-RewriteCond %{HTTP_ACCEPT} .+
-RewriteRule ^mapping-vocabulary/?$ - [R=406,L]
-
 # Default
 RewriteRule ^mapping-vocabulary/?$ https://w3id.org/health-ri/mapping-vocabulary/ttl [R=303,L]
 
@@ -209,6 +193,7 @@ RewriteRule ^mapping-vocabulary/(spec|specification)/?$ https://health-ri.github
 
 # --- Versioned vocabulary (vX.Y.Z) ---
 # Negotiation
+
 RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml) [NC]
 RewriteCond %{HTTP_ACCEPT} text/html [NC,OR]
 RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [NC,OR]
@@ -223,9 +208,6 @@ RewriteCond %{HTTP_ACCEPT} application/n-triples [NC,OR]
 RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [NC,OR]
 RewriteCond %{HTTP_ACCEPT} \*/\* [NC]
 RewriteRule ^mapping-vocabulary/v([0-9]+\.[0-9]+\.[0-9]+)/?$ https://w3id.org/health-ri/mapping-vocabulary/v$1/ttl [R=303,L]
-
-RewriteCond %{HTTP_ACCEPT} .+
-RewriteRule ^mapping-vocabulary/v([0-9]+\.[0-9]+\.[0-9]+)/?$ - [R=406,L]
 
 RewriteRule ^mapping-vocabulary/v([0-9]+\.[0-9]+\.[0-9]+)/?$ https://w3id.org/health-ri/mapping-vocabulary/v$1/ttl [R=303,L]
 
